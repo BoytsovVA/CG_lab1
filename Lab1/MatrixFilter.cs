@@ -39,5 +39,19 @@ namespace Lab1
                 Clamp((int)resultB, 0, 255)
                 );
         }
+
+        public new Bitmap processImage(Bitmap sourceImage)
+        {
+            Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
+            for (int i = 0; i < sourceImage.Width; i++)
+            {
+                //worker.ReportProgress((int)((float)i / sourceImage.Width * 100));
+                for (int j = 0; j < sourceImage.Height; j++)
+                {
+                    resultImage.SetPixel(i, j, calculateNewPixelColor(sourceImage, i, j));
+                }
+            }
+            return resultImage;
+        }
     }
 }

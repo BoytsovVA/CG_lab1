@@ -14,8 +14,8 @@ namespace Lab1
     public partial class Form1 : Form
     {
         Bitmap image;
-        bool button = false;
-        bool x1, x2, x3, x4, x5, x6, x7, x8, x9;
+
+        float[,] tmp = null;
         public Form1()
         {
             InitializeComponent();
@@ -108,56 +108,6 @@ namespace Lab1
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
-        private void openingToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (button == true)
-            {
-                button = false;
-                Bitmap newImage = (image);
-                Morphological a = new Morphological(newImage);
-                a.ChangeMask(x1, x2, x3, x4, x5, x6, x7, x8, x9);
-                newImage = a.Morphologicalopenning();
-                pictureBox1.Image = newImage;
-                image = newImage;
-                pictureBox1.Refresh();
-            }
-
-            else
-            {
-                Bitmap newImage = (image);
-                Morphological a = new Morphological(newImage);
-                newImage = a.Morphologicalopenning();
-                pictureBox1.Image = newImage;
-                image = newImage;
-                pictureBox1.Refresh();
-            }
-        }
-
-        private void gradToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (button == true)
-            {
-                button = false;
-                Bitmap newImage = (image);
-                Morphological a = new Morphological(newImage);
-                a.ChangeMask(x1, x2, x3, x4, x5, x6, x7, x8, x9);
-                newImage = a.MorphologicalGrad();
-                pictureBox1.Image = newImage;
-                image = newImage;
-                pictureBox1.Refresh();
-            }
-
-            else
-            {
-                Bitmap newImage = (image);
-                Morphological a = new Morphological(newImage);
-                newImage = a.MorphologicalGrad();
-                pictureBox1.Image = newImage;
-                image = newImage;
-                pictureBox1.Refresh();
-            }
-        }
-
         private void медианныйФильтрToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MedianFilter filter = new MedianFilter();
@@ -172,26 +122,25 @@ namespace Lab1
             }
             else
             {
-
-                if (textBox1.ToString() == "true") x1 = true;
-                else x1 = false;
-                if (textBox2.ToString() == "true") x2 = true;
-                else x2 = false;
-                if (textBox3.ToString() == "true") x3 = true;
-                else x3 = false;
-                if (textBox4.ToString() == "true") x4 = true;
-                else x4 = false;
-                if (textBox5.ToString() == "true") x5 = true;
-                else x5 = false;
-                if (textBox5.ToString() == "true") x6 = true;
-                else x6 = false;
-                if (textBox7.ToString() == "true") x7 = true;
-                else x7 = false;
-                if (textBox8.ToString() == "true") x8 = true;
-                else x8 = false;
-                if (textBox9.ToString() == "true") x9 = true;
-                else x9 = false;
-                button = true;
+                tmp = new float[3, 3];
+                if (float.Parse(textBox1.Text) == 1) tmp[0,0] = 1;
+                else tmp[0, 0] = 0;
+                if (float.Parse(textBox2.Text) == 1) tmp[0, 1] = 1;
+                else tmp[0, 1] = 0;
+                if (float.Parse(textBox3.Text) == 1) tmp[0, 2] = 1;
+                else tmp[0, 2] = 0;
+                if (float.Parse(textBox4.Text) == 1) tmp[1, 0] = 1;
+                else tmp[1, 0] = 0;
+                if (float.Parse(textBox5.Text) == 1) tmp[1, 1] = 1;
+                else tmp[1, 1] = 0;
+                if (float.Parse(textBox6.Text) == 1) tmp[1, 2] = 1;
+                else tmp[1, 2] = 0;
+                if (float.Parse(textBox7.Text) == 1) tmp[2, 0] = 1;
+                else tmp[2, 0] = 0;
+                if (float.Parse(textBox8.Text) == 1) tmp[2, 1] = 1;
+                else tmp[2, 1] = 0;
+                if (float.Parse(textBox9.Text) == 1) tmp[2, 2] = 1;
+                else tmp[2, 2] = 0;
             }
         }
 
@@ -199,6 +148,19 @@ namespace Lab1
         {
 
         }
+
+        private void dilationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new Dilation();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void erosionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new Erosion();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
 
         private void серыйМирToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -209,34 +171,48 @@ namespace Lab1
 
         private void линейноеРастяжениеГистограммыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Bitmap newImage = (image);
-            Filters filter = new LinearHistogram(newImage);
+            Filters filter = new LinearHistogram();
+            filter.calculateMinMax(image);
             backgroundWorker1.RunWorkerAsync(filter);
+        }
+        private void openingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpeningFilter filter = new OpeningFilter(tmp);
+            Bitmap newImage;
+            if (tmp == null)
+                newImage = filter.ProcessImage(image);
+            else
+                newImage = filter.processImage(image); 
+            if (backgroundWorker1.CancellationPending != true)
+                image = newImage;
+            pictureBox1.Image = image;
+            pictureBox1.Refresh();
+        }
+
+        private void gradToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GradFilter filter = new GradFilter();
+            Bitmap newImage = filter.ProcessImage(image);
+            if (backgroundWorker1.CancellationPending != true)
+                image = newImage;
+            pictureBox1.Image = image;
+            pictureBox1.Refresh();
         }
 
         private void closingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (button == true)
-            {
-                button = false;
-                Bitmap newImage = (image);
-                Morphological a = new Morphological(newImage);
-                a.ChangeMask(x1, x2, x3, x4, x5, x6, x7, x8, x9);
-                newImage = a.Morphologicalclosing();
-                pictureBox1.Image = newImage;
-                image = newImage;
-                pictureBox1.Refresh();
-            }
-
+            ClosingFilter filter = new ClosingFilter(tmp);
+            Bitmap newImage;
+            if (tmp == null)
+                 newImage = filter.ProcessImage(image);
             else
-            {
-                Bitmap newImage = (image);
-                Morphological a = new Morphological(newImage);
-                newImage = a.Morphologicalclosing();
-                pictureBox1.Image = newImage;
+                 newImage = filter.processImage(image);
+
+
+            if (backgroundWorker1.CancellationPending != true)
                 image = newImage;
-                pictureBox1.Refresh();
-            }
+            pictureBox1.Image = image;
+            pictureBox1.Refresh();
         }
 
         private void волныToolStripMenuItem_Click(object sender, EventArgs e)

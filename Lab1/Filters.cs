@@ -14,6 +14,12 @@ namespace Lab1
         public int sumG = 0;
         public int sumB = 0;
         public int avg = 0;
+        public int minR = 255;
+        public int minG = 255;
+        public int minB = 255;
+        public int maxR = 0;
+        public int maxG = 0;
+        public int maxB = 0;
         public Bitmap processImage(Bitmap sourceImage)
         {
             Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
@@ -37,7 +43,28 @@ namespace Lab1
                 return max;
             return value;
         }
-
+        public void calculateMinMax(Bitmap sourceImage)
+        {
+            for (int i = 0; i < sourceImage.Width; i++)
+            {
+                for (int j = 0; j < sourceImage.Height; j++)
+                {
+                    Color color = sourceImage.GetPixel(i, j);
+                    if (color.R < minR)
+                        minR = color.R;
+                    if (color.R > maxR)
+                        maxR = color.R;
+                    if (color.G < minG)
+                        minG = color.G;
+                    if (color.G > maxG)
+                        maxG = color.G;
+                    if (color.B < minB)
+                        minB = color.B;
+                    if (color.B > maxB)
+                        maxB = color.B;
+                }
+            }
+        }
         public void calculateAvg(Bitmap sourceImage)
         {
             for (int i = 0; i < sourceImage.Width; i++)

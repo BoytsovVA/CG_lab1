@@ -52,8 +52,10 @@
             this.резкость1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.медианныйФильтрToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.морфоToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.closingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dilationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.erosionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.closingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gradToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -265,19 +267,28 @@
             // морфоToolStripMenuItem
             // 
             this.морфоToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.closingToolStripMenuItem,
+            this.dilationToolStripMenuItem,
+            this.erosionToolStripMenuItem,
             this.openingToolStripMenuItem,
+            this.closingToolStripMenuItem,
             this.gradToolStripMenuItem});
             this.морфоToolStripMenuItem.Name = "морфоToolStripMenuItem";
             this.морфоToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.морфоToolStripMenuItem.Text = "МатМорфология";
             // 
-            // closingToolStripMenuItem
+            // dilationToolStripMenuItem
             // 
-            this.closingToolStripMenuItem.Name = "closingToolStripMenuItem";
-            this.closingToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
-            this.closingToolStripMenuItem.Text = "Closing";
-            this.closingToolStripMenuItem.Click += new System.EventHandler(this.closingToolStripMenuItem_Click);
+            this.dilationToolStripMenuItem.Name = "dilationToolStripMenuItem";
+            this.dilationToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.dilationToolStripMenuItem.Text = "Dilation";
+            this.dilationToolStripMenuItem.Click += new System.EventHandler(this.dilationToolStripMenuItem_Click);
+            // 
+            // erosionToolStripMenuItem
+            // 
+            this.erosionToolStripMenuItem.Name = "erosionToolStripMenuItem";
+            this.erosionToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.erosionToolStripMenuItem.Text = "Erosion";
+            this.erosionToolStripMenuItem.Click += new System.EventHandler(this.erosionToolStripMenuItem_Click);
             // 
             // openingToolStripMenuItem
             // 
@@ -285,6 +296,13 @@
             this.openingToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.openingToolStripMenuItem.Text = "Opening";
             this.openingToolStripMenuItem.Click += new System.EventHandler(this.openingToolStripMenuItem_Click);
+            // 
+            // closingToolStripMenuItem
+            // 
+            this.closingToolStripMenuItem.Name = "closingToolStripMenuItem";
+            this.closingToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.closingToolStripMenuItem.Text = "Closing";
+            this.closingToolStripMenuItem.Click += new System.EventHandler(this.closingToolStripMenuItem_Click);
             // 
             // gradToolStripMenuItem
             // 
@@ -415,7 +433,7 @@
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(277, 20);
             this.textBox10.TabIndex = 6;
-            this.textBox10.Text = "Задайте структурный элемент true/false";
+            this.textBox10.Text = "Задайте структурный элемент";
             // 
             // button2
             // 
@@ -497,6 +515,8 @@
         private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.TextBox textBox10;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ToolStripMenuItem dilationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem erosionToolStripMenuItem;
     }
 }
 

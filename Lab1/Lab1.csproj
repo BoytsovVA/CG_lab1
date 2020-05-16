@@ -46,9 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LinearHistogram.cs" />
     <Compile Include="BlurFilter.cs" />
     <Compile Include="BrightnessFilter.cs" />
+    <Compile Include="ClosingFilter.cs" />
+    <Compile Include="Dilation.cs" />
     <Compile Include="EmbossingFilter.cs" />
+    <Compile Include="Erosion.cs" />
     <Compile Include="Filters.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -58,13 +62,13 @@
     </Compile>
     <Compile Include="GaussianFilter.cs" />
     <Compile Include="GlassFilter.cs" />
+    <Compile Include="GradFilter.cs" />
     <Compile Include="GrayScaleFilter.cs" />
     <Compile Include="GrayWorldFilter.cs" />
     <Compile Include="InvertFilter.cs" />
-    <Compile Include="LinearHistogram.cs" />
     <Compile Include="MatrixFilter.cs" />
     <Compile Include="MedianFilter.cs" />
-    <Compile Include="Morphological.cs" />
+    <Compile Include="OpeningFilter.cs" />
     <Compile Include="PerfectReflectorFilter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -72,6 +76,7 @@
     <Compile Include="SharpnessFilter.cs" />
     <Compile Include="SharpnessFilter2.cs" />
     <Compile Include="SobelFilter.cs" />
+    <Compile Include="HelperClass.cs" />
     <Compile Include="WavesFilter.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
